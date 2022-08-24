@@ -1,0 +1,19 @@
+name: "Set/Bump Version on pom.xml"
+description: "This GitHub Action can either set the version in a pom.xml, or get the current version and bumps it (patch)"
+inputs:
+  pom_path:
+    description: "The path to the pom.xml file"
+    required: false
+    default: pom.xml
+  version:
+    description: "The version number to set. If not provided, the current version will be bumped by 1 (patch)"
+    required: false
+outputs:
+  new_version:
+    description: "The updated version number"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.pom_path}}
+    - ${{ inputs.version}}
